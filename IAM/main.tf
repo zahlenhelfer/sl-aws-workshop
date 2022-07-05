@@ -29,3 +29,8 @@ resource "aws_iam_policy" "ec2-admin-policy" {
   description = "Allow all EC2 actions"
   policy      = file("policies/ec2_admin_policy.tmpl")
 }
+
+resource "aws_iam_user_policy_attachment" "attach_ec2_policy" {
+  user       = aws_iam_user.devdan-user.name
+  policy_arn = aws_iam_policy.ec2-admin-policy.arn
+}
